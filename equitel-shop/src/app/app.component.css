@@ -1,0 +1,10 @@
+.header{
+    width: 100vw;
+    height: 10vh;
+}
+.main{
+    width: 100vw;
+    height: 90vh;
+    /* background-color: aquamarine; */
+    overflow-x: hidden;
+}

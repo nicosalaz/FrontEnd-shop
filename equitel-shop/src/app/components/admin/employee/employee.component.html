@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <div class="container">
+    <h2>
+      Empleados
+      <i class="bi bi-person-lines-fill"></i>
+    </h2>
+    <div class="actions">
+      <button class="btn btn-outline-primary" 
+      (click)="resetUpdate()"
+      data-bs-toggle="modal" data-bs-target="#employeeModal">
+        Agregar Empleado
+        <i class="bi bi-person-plus-fill"></i>
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Usuario</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let employee of employeeList; index as i">
+          <td>{{i+1}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.user}}</td>
+          <td>{{employee.fkRole.nameRole}}</td>
+          <td>
+            <button class="btn btn-outline-warning" 
+            (click)="getDataToUpdate(employee.idEmpleado)" 
+            style="margin: 5px;"
+            data-bs-toggle="modal" data-bs-target="#employeeModal">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn btn-outline-danger" 
+            style="margin: 5px;"
+            (click)="deleteEmployee(employee.idEmpleado)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="employeeModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" id="employeeForm"  [formGroup]="formEmployee">
+          <div class="col-12">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="names" placeholder="Juan" [minLength]="3" required>
+            <div class="text-danger" *ngIf="formEmployee.get('names')?.invalid && formEmployee.get('names')?.touched">
+              Debe diligenciar este campo
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input type="apellidos" class="form-control" id="lastName" formControlName="LastName" [minLength]="5" placeholder="Perez Diaz" required>
+            <div class="text-danger" *ngIf="formEmployee.get('LastName')?.invalid && formEmployee.get('LastName')?.touched">
+              Debe diligenciar este campo
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="user" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="user" formControlName="user" [minLength]="3" placeholder="juanP12" required>
+            <div class="text-danger" *ngIf="formEmployee.get('user')?.invalid && formEmployee.get('user')?.touched">
+              Debe diligenciar este campo
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="pass" class="form-label">Clave</label>
+            <input type="password" class="form-control" id="pass" formControlName="pass" [minLength]="5" placeholder="******" required>
+            <div class="text-danger" *ngIf="formEmployee.get('pass')?.invalid && formEmployee.get('pass')?.touched">
+              Debe diligenciar este campo
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="role" class="form-label">State</label>
+            <select id="role" class="form-select" formControlName="role">
+              <option *ngFor="let role of roleList" value="{{role.id}}">{{role.nameRole}}</option>
+            </select>
+            <div class="text-danger" *ngIf="formEmployee.get('role')?.invalid && formEmployee.get('role')?.touched">
+              Debe diligenciar este campo
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [hidden]="update == true" (click)="createEmployee()" form="employeeForm">Crear</button>
+        <button type="submit" class="btn btn-primary" [hidden]="update == false" (click)="updateEmployee()" form="employeeForm">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

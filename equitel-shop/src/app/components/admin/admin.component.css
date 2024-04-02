@@ -1,0 +1,10 @@
+.container-fluid{
+    width: 100%;
+    height: auto;
+    /* background-color: blue; */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: start;
+    padding: 10px;
+}

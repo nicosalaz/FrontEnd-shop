@@ -1,0 +1,27 @@
+<main class="login">
+    <div class="card text-center w-25">
+        <div class="card-header">
+            <h5 class="card-title">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Inicio de sesión
+            </h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formLogin">
+                <div class="form-floating">
+                    <input type="text" class="form-control" formControlName="user" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">User</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" formControlName="password" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <br>
+                <button class="btn btn-primary" (click)="authenticated()">Entrar</button>
+            </form>
+        </div>
+        <div class="card-footer text-body-secondary">
+            ¿Olvidaste tu contraseña?
+        </div>
+    </div>
+</main>
